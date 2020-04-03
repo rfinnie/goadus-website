@@ -1,0 +1,8 @@
+body {
+  color: #eee;
+  background: #222 url(bg.png);
+}
+input, textarea, button {
+  background-color : #333;
+}
+

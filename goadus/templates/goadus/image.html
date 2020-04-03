@@ -1,0 +1,22 @@
+{% extends "./base.html" %}
+
+{% block content %}
+<h1>{{ object.original_filename }}</h1>
+<table class="table">
+<tr><th>Filename</th><th>Image Size</th><th>Bytes</th><th>Uploaded</th></tr>
+{% for image_file in object.imagefile_set.all %}
+{% if image_file.type != 'uploaded' %}
+<tr>
+<td><a rel="nofollow" href="{{ image_file.file.url }}">{{ image_file.file.name }}</a></td>
+<td>{{ image_file.file.width }}×{{ image_file.file.height }} ({{ image_file.type }})</td>
+<td>{{ image_file.file.size }}</td>
+<td>{{ image_file.date_added }}</td>
+</tr>
+{% endif %}
+{% endfor %}
+</table>
+<p>Uploaded {{ object.image_set.date_added }} by {{ object.image_set.user }}.</p>
+{% if object.image_set.date_expires %}
+<p>Image will be deleted in approximately {{ object.image_set.date_expires|timeuntil }}.</p>
+{% endif %}
+{% endblock %}

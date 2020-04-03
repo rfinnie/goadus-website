@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>goad.us</title>
+  <link rel="stylesheet" href="{% static 'goadus/style.css' %}">
+</head>
+
+<!-- https://commons.wikimedia.org/wiki/File:Grey_squirrel_(Sciurus_carolinensis)_02.jpg -->
+<body style="margin: 0; padding: 0;">
+<div class="container" id="bigsquirrel" style="height:100vh; width: 100vw; max-height: 100vh; max-width: 100vw; padding: 0; text-align: center;">
+<img src="{% static 'goadus/squirrel.jpg' %}" style="max-width: 100vw; max-height: 100vh;">
+</div>
+<script src="{% static 'goadus/jquery.js' %}"></script>
+<script src="{% static 'goadus/jquery.zoom.js' %}"></script>
+<script>
+  if ($ && $.fn.zoom) {
+    $('#bigsquirrel').zoom({});
+  }
+</script>
+</body>
+</html>
+
