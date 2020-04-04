@@ -10,5 +10,5 @@ class UploadForm(forms.Form):
         self.helper.add_input(Submit('submit', 'Upload', css_class='btn btn-primary btn-lg btn-block'))
 
     files = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
-    temporary = forms.BooleanField(required=False)
-    noresize = forms.BooleanField(required=False)
+    temporary = forms.BooleanField(required=False, label='Delete after about a week')
+    noresize = forms.BooleanField(required=False, label='Do not resize')
