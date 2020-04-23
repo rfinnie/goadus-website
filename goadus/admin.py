@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Image, ImageFile, ImageSet
+from .models import ApiKey, Image, ImageFile, ImageSet
 
 
 class ImageAdmin(admin.ModelAdmin):
@@ -41,6 +41,13 @@ class ImageSetAdmin(admin.ModelAdmin):
     search_fields = ('slug',)
 
 
+class ApiKeyAdmin(admin.ModelAdmin):
+    list_display = ('slug', 'date_added', 'date_expires', 'user')
+    ordering = ('-date_added',)
+    search_fields = ('slug',)
+
+
 admin.site.register(Image, ImageAdmin)
 admin.site.register(ImageFile, ImageFileAdmin)
 admin.site.register(ImageSet, ImageSetAdmin)
+admin.site.register(ApiKey, ApiKeyAdmin)

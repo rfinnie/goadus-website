@@ -4,7 +4,6 @@ import json
 import mimetypes
 import os
 
-from django.contrib.auth import authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.files import File as DjangoFile
 from django.core.files.images import ImageFile as DjangoImageFile
@@ -19,7 +18,7 @@ import PIL.ExifTags
 import PIL.Image
 
 from .forms import UploadForm
-from .models import Image, ImageFile, ImageSet
+from .models import ApiKey, Image, ImageFile, ImageSet
 from .utils import werder_name
 
 
@@ -182,12 +181,11 @@ class ImageSetView(generic.DetailView):
 
 @csrf_exempt
 def api_upload(request):
-    print(request.POST)
-    if 'username' not in request.POST or 'password' not in request.POST:
+    try:
+        api_key = ApiKey.objects.get(slug=request.POST.get('key', None))
+    except ApiKey.DoesNotExist:
         return HttpResponseForbidden()
-    user = authenticate(username=request.POST['username'], password=request.POST['password'])
-    if user is None:
-        return HttpResponseForbidden()
+    user = api_key.user
     if 'noresize' in request.POST and request.POST['noresize']:
         noresize = True
     else:
