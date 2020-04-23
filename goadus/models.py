@@ -24,7 +24,7 @@ class IGoadStorage(storage.FileSystemStorage):
 
 def get_image_path(instance, filename):
     base_file = os.path.basename(filename)
-    return '{}/{}/{}'.format(base_file[0:1], base_file[1:2], base_file)
+    return "{}/{}/{}".format(base_file[0:1], base_file[1:2], base_file)
 
 
 class ImageSet(models.Model):
@@ -35,7 +35,7 @@ class ImageSet(models.Model):
     date_expires = models.DateTimeField(blank=True, null=True)
 
     def get_absolute_url(self):
-        return reverse_lazy('imageset', kwargs={'slug': self.slug})
+        return reverse_lazy("imageset", kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.slug
@@ -49,7 +49,7 @@ class Image(models.Model):
     image_set = models.ForeignKey(ImageSet, on_delete=models.CASCADE, blank=False, null=False)
 
     def get_absolute_url(self):
-        return reverse_lazy('image', kwargs={'slug': self.slug})
+        return reverse_lazy("image", kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.slug
@@ -57,10 +57,10 @@ class Image(models.Model):
 
 class ImageFile(models.Model):
     TYPES = (
-        ('uploaded', 'Unsanitized original image'),
-        ('original', 'Original image'),
-        ('medium', 'Resized image'),
-        ('thumbnail', 'Thumbnail image'),
+        ("uploaded", "Unsanitized original image"),
+        ("original", "Original image"),
+        ("medium", "Resized image"),
+        ("thumbnail", "Thumbnail image"),
     )
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, blank=False, null=False)
     file = models.ImageField(max_length=200, storage=IGoadStorage(), blank=False, null=False)
