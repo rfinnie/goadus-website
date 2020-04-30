@@ -28,9 +28,13 @@ def get_image_path(instance, filename):
 
 
 class ImageSet(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, blank=False, null=False)
+    id = models.UUIDField(
+        primary_key=True, default=uuid.uuid4, editable=False, blank=False, null=False
+    )
     slug = models.SlugField(default=werder_name, unique=True, blank=False, null=False)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=False, null=False)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=False, null=False
+    )
     date_added = models.DateTimeField(default=timezone.now, blank=False, null=False)
     date_expires = models.DateTimeField(blank=True, null=True)
 
@@ -42,11 +46,15 @@ class ImageSet(models.Model):
 
 
 class Image(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, blank=False, null=False)
+    id = models.UUIDField(
+        primary_key=True, default=uuid.uuid4, editable=False, blank=False, null=False
+    )
     slug = models.SlugField(default=werder_name, unique=True, blank=False, null=False)
     original_filename = models.CharField(max_length=200, blank=False, null=False)
     content_type = models.CharField(max_length=200, blank=True, null=True)
-    image_set = models.ForeignKey(ImageSet, on_delete=models.CASCADE, blank=False, null=False)
+    image_set = models.ForeignKey(
+        ImageSet, on_delete=models.CASCADE, blank=False, null=False
+    )
 
     def get_absolute_url(self):
         return reverse_lazy("image", kwargs={"slug": self.slug})
@@ -62,8 +70,12 @@ class ImageFile(models.Model):
         ("medium", "Resized image"),
         ("thumbnail", "Thumbnail image"),
     )
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, blank=False, null=False)
-    file = models.ImageField(max_length=200, storage=IGoadStorage(), blank=False, null=False)
+    id = models.UUIDField(
+        primary_key=True, default=uuid.uuid4, editable=False, blank=False, null=False
+    )
+    file = models.ImageField(
+        max_length=200, storage=IGoadStorage(), blank=False, null=False
+    )
     type = models.CharField(max_length=200, choices=TYPES, blank=False, null=False)
     image = models.ForeignKey(Image, on_delete=models.CASCADE, blank=False, null=False)
 
@@ -72,9 +84,15 @@ class ImageFile(models.Model):
 
 
 class ApiKey(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, blank=False, null=False)
-    slug = models.SlugField(default=werder_api_key, unique=True, blank=False, null=False)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=False, null=False)
+    id = models.UUIDField(
+        primary_key=True, default=uuid.uuid4, editable=False, blank=False, null=False
+    )
+    slug = models.SlugField(
+        default=werder_api_key, unique=True, blank=False, null=False
+    )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=False, null=False
+    )
     date_added = models.DateTimeField(default=timezone.now, blank=False, null=False)
     date_expires = models.DateTimeField(blank=True, null=True)
 

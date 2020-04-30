@@ -12,4 +12,4 @@ lint:
 test: lint
 
 black:
-	$(PYTHON) -mblack --line-length=120 --exclude=migrations $(CURDIR)
+	$(PYTHON) -mblack --exclude=migrations $(CURDIR)

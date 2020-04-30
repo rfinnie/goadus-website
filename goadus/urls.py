@@ -20,8 +20,16 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("accounts/login/", auth_views.LoginView.as_view(template_name="goadus/login.html"), name="login"),
-    path("accounts/logout/", auth_views.LogoutView.as_view(template_name="goadus/logout.html"), name="logout"),
+    path(
+        "accounts/login/",
+        auth_views.LoginView.as_view(template_name="goadus/login.html"),
+        name="login",
+    ),
+    path(
+        "accounts/logout/",
+        auth_views.LogoutView.as_view(template_name="goadus/logout.html"),
+        name="logout",
+    ),
     path("admin/", admin.site.urls),
     path("api/upload/", views.api_upload, name="api-upload"),
     path("image/<slug>/", views.ImageView.as_view(), name="image"),

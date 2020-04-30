@@ -17,7 +17,11 @@ class Command(BaseCommand):
         for image_set in ImageSet.objects.filter(date_expires__lt=timezone.now()):
             for image in image_set.image_set.all():
                 for image_file in image.imagefile_set.all():
-                    os.remove("{}/{}".format(MEDIA_ROOT, self.make_segmented_path(image_file.file.name)))
+                    os.remove(
+                        "{}/{}".format(
+                            MEDIA_ROOT, self.make_segmented_path(image_file.file.name)
+                        )
+                    )
             image_set.delete()
 
         for api_key in ApiKey.objects.filter(date_expires__lt=timezone.now()):

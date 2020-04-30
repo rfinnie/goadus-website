@@ -16,7 +16,27 @@ import random
 
 
 def get_werder_werds(numwerd=0):
-    vow = ["a", "e", "i", "o", "u", "ee", "ai", "ie", "io", "oo", "ea", "oi", "oa", "ou", "a", "e", "i", "o", "u"]
+    vow = [
+        "a",
+        "e",
+        "i",
+        "o",
+        "u",
+        "ee",
+        "ai",
+        "ie",
+        "io",
+        "oo",
+        "ea",
+        "oi",
+        "oa",
+        "ou",
+        "a",
+        "e",
+        "i",
+        "o",
+        "u",
+    ]
     beg = [
         "sn",
         "sl",
