@@ -2,7 +2,7 @@
 
 {% block content %}
 {% for image in object.image_set.all %}
-<h1><a href="{% url 'image' image.slug %}">{{ image.original_filename }}</a></h1>
+<h1><a href="{% url 'image' image %}">{{ image.original_filename }}</a></h1>
 <table class="table">
 <tr><th>Filename</th><th>Image Size</th><th>Bytes</th></tr>
 {% for image_file in image.imagefile_set.all %}
