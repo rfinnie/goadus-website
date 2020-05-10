@@ -24,7 +24,7 @@ class IGoadStorage(storage.FileSystemStorage):
 
 def get_image_path(instance, filename):
     base_file = os.path.basename(filename)
-    return "{}/{}/{}".format(base_file[0:1], base_file[1:2], base_file)
+    return os.path.join(base_file[0:1], base_file[1:2], base_file)
 
 
 class ImageSet(models.Model):
