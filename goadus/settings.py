@@ -122,9 +122,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "https://i.goad.us/"
 
 CRISPY_TEMPLATE_PACK = "bootstrap3"
-
-
-try:
-    from .local_settings import *  # noqa: F401,F403
-except ImportError:
-    pass

@@ -1,0 +1,11 @@
+include Makefile
+include manage.py
+include MANIFEST.in
+include README.md
+include requirements.txt
+include tests/*.py
+include tox.ini
+include goadus/static/goadus/*.css
+include goadus/static/goadus/*.js
+include goadus/static/goadus/*.jpg
+include goadus/templates/goadus/*.html
