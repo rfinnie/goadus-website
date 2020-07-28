@@ -22,11 +22,6 @@ class IGoadStorage(storage.FileSystemStorage):
         return os.path.join(*parts)
 
 
-def get_image_path(instance, filename):
-    base_file = os.path.basename(filename)
-    return os.path.join(base_file[0:1], base_file[1:2], base_file)
-
-
 class ImageSet(models.Model):
     id = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False, blank=False, null=False
