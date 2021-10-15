@@ -1,11 +1,13 @@
 import random
 
-from .werder import get_werder_werds
+from .werder import Werder
 
 
 def werder_api_key():
-    return "-".join(get_werder_werds(4))
+    w = Werder()
+    return "-".join([w.werd() for _ in range(4)])
 
 
 def werder_name():
-    return "{}-{}".format(get_werder_werds(1)[0], int(random.uniform(0, 999)))
+    w = Werder()
+    return "{}-{}".format(w.werd(), int(random.uniform(0, 999)))

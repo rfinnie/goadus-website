@@ -1,6 +1,9 @@
-#!/usr/bin/python3
-
-# A 2018 Python port of a 2008 PHP port of a 1998 C program.
+# SPDX-FileCopyrightText: Copyright (C) 2018-2021 Ryan Finnie
+# SPDX-License-Identifier: MIT
+#
+# A 2021 rewrite of a 2018 Python port of a 2008 PHP port of a 1998 C
+# program. (Sorry, I didn't have the patience to wait until 2028 to
+# continue the pattern.)
 #
 # Original C header:
 #
@@ -11,144 +14,85 @@
 #
 #     A relatively inefficient way
 #      to make snoof
+#
+# The original code did not include any copyright notice, and the
+# original author has not responded to a request for clarification.
+# However, this port has been effectively 100% rewritten from the
+# original C code that it can be considered completely separate
+# software, and so is explicitly licensed MIT.
 
 import random
+import sys
 
 
-def get_werder_werds(numwerd=0):
-    vow = [
-        "a",
-        "e",
-        "i",
-        "o",
-        "u",
-        "ee",
-        "ai",
-        "ie",
-        "io",
-        "oo",
-        "ea",
-        "oi",
-        "oa",
-        "ou",
-        "a",
-        "e",
-        "i",
-        "o",
-        "u",
-    ]
-    beg = [
-        "sn",
-        "sl",
-        "tr",
-        "l",
-        "bl",
-        "fl",
-        "cr",
-        "b",
-        "dr",
-        "wr",
-        "gr",
-        "pl",
-        "squ",
-        "qu",
-        "cl",
-        "spl",
-        "fr",
-        "m",
-        "k",
-    ]
-    end = [
-        "nd",
-        "ck",
-        "ll",
-        "mn",
-        "w",
-        "ls",
-        "sk",
-        "rt",
-        "rd",
-        "zz",
-        "gh",
-        "ght",
-        "ny",
-        "nct",
-        "ch",
-        "st",
-        "nt",
-        "m",
-        "ng",
-        "ly",
-        "d",
-        "ff",
-        "t",
-    ]
-    all = [
-        "sn",
-        "d",
-        "sp",
-        "s",
-        "th",
-        "r",
-        "t",
-        "p",
-        "sh",
-        "ph",
-        "ct",
-        "nk",
-        "str",
-        "f",
-        "h",
-        "c",
-        "m",
-        "n",
-        "cr",
-        "x",
-        "st",
-        "b",
-        "g",
-        "k",
-        "l",
-        "v",
-        "w",
-        "z",
-    ]
+class Werder:
+    """Generate random (but pronounceable) werds"""
 
-    if numwerd <= 0:
-        numwerd = random.randint(5, 9)
+    # SPDX-SnippetComment: Originally from https://github.com/rfinnie/rf-pymods
+    # SPDX-SnippetCopyrightText: Copyright (C) 2018-2021 Ryan Finnie
+    # SPDX-LicenseInfoInSnippet: MIT
 
-    out = []
-    for _ in range(numwerd):
+    parts_vowel = "a a ai e e ea ee i i ie io o o oa oi oo ou u u".split(" ")
+    parts_begin = "b bl cl cr dr fl fr gr k l m pl qu sl sn spl squ tr wr".split(" ")
+    parts_end = (
+        "ch ck d ff gh ght ll ls ly m mn nct nd ng nt ny rd rt sk st t w zz".split(" ")
+    )
+    parts_rest = (
+        "b c cr ct d f g h k l m n nk p ph r s sh sn sp st str t th v w x z".split(" ")
+    )
+    werds_min = 5
+    werds_max = 9
+    syllables_min = 3
+    syllables_max = 7
+
+    def werd(self, syllables=-1):
+        """Return a werd
+        If syllables is -1 (default) a random number of syllables are
+        selected.
+        """
+
         werd = ""
-        numsyl = random.randint(3, 7)
-        csyl = numsyl
+        if syllables == -1:
+            syllables = random.randint(self.syllables_min, self.syllables_max)
 
-        # start with consonant or vowel
+        # Start with a consonant 2/3 of the time
         flip = random.randint(0, 2)
-        if csyl % 2:
-            flip = not flip
 
-        while csyl > 0:
-            if ((not flip) and (csyl % 2)) or ((flip) and (not (csyl % 2))):
-                if csyl == numsyl:
-                    werd += random.choice(beg)
-                elif csyl == 1:
-                    werd += random.choice(end)
-                else:
-                    werd += random.choice(all)
+        for syllable in range(syllables):
+            # Flip between consonants and vowels
+            if (flip + syllable) % 2:
+                werd += random.choice(self.parts_vowel)
+            elif syllable == 0:
+                werd += random.choice(self.parts_begin)
+            elif syllable == syllables - 1:
+                werd += random.choice(self.parts_end)
             else:
-                werd += random.choice(vow)
-            csyl = csyl - 1
-        out.append(werd)
+                werd += random.choice(self.parts_rest)
 
-    return out
+        return werd
+
+    def sentence(self, werds=-1):
+        """Return a werder sentence
+        If werds is -1 (default) a random number of werds are selected.
+        """
+
+        if werds == -1:
+            werds = random.randint(self.werds_min, self.werds_max)
+
+        return " ".join(
+            [self.werd() for _ in range(werds)]
+        ).capitalize() + random.choice(["!", ".", "?"])
 
 
-def get_werder():
-    sent = " ".join(get_werder_werds()).capitalize()
-    sent += random.choice(["!", ".", "?"])
-    return sent
+def main():
+    """Primary interactive entry"""
+    print(Werder().sentence())
 
 
-if __name__ == "__main__":
-    print(get_werder())
+def _init():
+    """Testable __main__ entry function"""
+    if __name__ == "__main__":
+        sys.exit(main())
+
+
+_init()
