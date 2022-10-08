@@ -9,5 +9,5 @@ setup(
     author="Ryan Finnie",
     packages=["goadus", "goadus.migrations", "goadus.management.commands"],
     include_package_data=True,
-    install_requires=["Django", "django-crispy-forms", "Pillow"],
+    install_requires=["Django", "django-crispy-forms", "Pillow", "tzdata"],
 )
