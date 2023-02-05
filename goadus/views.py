@@ -74,7 +74,7 @@ def handle_uploaded_file(fileobj, image_set, noresize=False):
         content_type = mimetypes.guess_type(original_filename)[0]
 
     if extension is None:
-        extension = "." + os.path.splitext(original_filename)[-1][1:]
+        extension = "." + os.path.splitext(original_filename)[-1][1:].lower()
 
     image = Image()
     image.original_filename = original_filename
