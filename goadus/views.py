@@ -60,6 +60,10 @@ def handle_uploaded_file(fileobj, image_set, noresize=False):
     pil_map = {
         "GIF": ("image/gif", ".gif"),
         "JPEG": ("image/jpeg", ".jpg"),
+        "MPO": (
+            "image/jpeg",
+            ".jpg",
+        ),  # https://github.com/python-pillow/Pillow/issues/1138
         "PNG": ("image/png", ".png"),
     }
     if pil_image:
