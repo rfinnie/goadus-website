@@ -1,11 +1,13 @@
-FROM ubuntu:20.04
+FROM python:3.10
 
-ENV DJANGO_MODULE=goadus
+WORKDIR /usr/src/app
 
-COPY . /tmp/django
-RUN /tmp/django/docker/build && rm -rf /tmp/django
-
-EXPOSE 8000/tcp
+COPY . .
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir gunicorn .
 
 USER nobody
-CMD ["/init"]
+ENV DJANGO_SETTINGS_MODULE="goadus.settings"
+ENV PYTHONPATH=/usr/local/lib/python
+CMD [ "gunicorn", "-b", "0.0.0.0:8000", "-k", "gthread", "--error-logfile", "-", "--capture-output", "goadus.wsgi:application" ]
+EXPOSE 8000/tcp
