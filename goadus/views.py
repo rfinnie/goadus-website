@@ -191,18 +191,20 @@ class ImageSetView(generic.DetailView):
 
 @csrf_exempt
 def api_upload(request):
+    if not request.headers.get("authorization"):
+        return HttpResponseForbidden()
+    auth_parts = request.headers["authorization"].split(" ", 1)
+    if auth_parts[0] != "Bearer" or len(auth_parts) < 2:
+        return HttpResponseForbidden()
     try:
-        api_key = ApiKey.objects.get(slug=request.POST.get("key", None))
+        api_key = ApiKey.objects.get(slug=auth_parts[1])
     except ApiKey.DoesNotExist:
         return HttpResponseForbidden()
     user = api_key.user
-    if "noresize" in request.POST and request.POST["noresize"]:
-        noresize = True
-    else:
-        noresize = False
+    noresize = bool(request.POST.get("noresize"))
     image_set = ImageSet()
     image_set.user = user
-    if "temporary" in request.POST and request.POST["temporary"]:
+    if request.POST.get("temporary"):
         image_set.date_expires = timezone.now() + timedelta(days=7)
     image_set.save()
     images = {}
