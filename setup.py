@@ -11,6 +11,7 @@ setup(
     include_package_data=True,
     install_requires=[
         "Django",
+        "django[argon2]",
         "django-crispy-forms",
         "crispy-bootstrap4",
         "Pillow",
