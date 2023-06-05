@@ -46,6 +46,10 @@ def process_image(image):
     return image
 
 
+def subdir_fn(fn):
+    return os.path.join(fn[0:1], fn[1:2], fn)
+
+
 def handle_uploaded_file(fileobj, image_set, noresize=False):
     original_filename = fileobj.name
     content_type = None
@@ -89,7 +93,7 @@ def handle_uploaded_file(fileobj, image_set, noresize=False):
     raw_converted_file = django_file(fileobj)
     raw_converted_file.file.seek(0)
     image_file = ImageFile()
-    raw_converted_file.name = "{}{}".format(werder_name(), extension)
+    raw_converted_file.name = subdir_fn("{}{}".format(werder_name(), extension))
     image_file.file = raw_converted_file
     image_file.type = "uploaded"
     image_file.image = image
@@ -100,7 +104,7 @@ def handle_uploaded_file(fileobj, image_set, noresize=False):
         raw_converted_file = django_file(fileobj)
         raw_converted_file.file.seek(0)
         image_file = ImageFile()
-        raw_converted_file.name = "{}{}".format(werder_name(), extension)
+        raw_converted_file.name = subdir_fn("{}{}".format(werder_name(), extension))
         image_file.file = raw_converted_file
         image_file.type = "original"
         image_file.image = image
@@ -111,7 +115,7 @@ def handle_uploaded_file(fileobj, image_set, noresize=False):
         pil_image.save(raw_converted_file.file, pil_image.format)
         raw_converted_file.file.seek(0)
         image_file = ImageFile()
-        raw_converted_file.name = "{}{}".format(werder_name(), extension)
+        raw_converted_file.name = subdir_fn("{}{}".format(werder_name(), extension))
         image_file.file = raw_converted_file
         image_file.type = "original"
         image_file.image = image
@@ -128,7 +132,7 @@ def handle_uploaded_file(fileobj, image_set, noresize=False):
         pil_image.save(raw_converted_file.file, pil_image.format)
         raw_converted_file.file.seek(0)
         image_file = ImageFile()
-        raw_converted_file.name = "{}{}".format(werder_name(), extension)
+        raw_converted_file.name = subdir_fn("{}{}".format(werder_name(), extension))
         image_file.file = raw_converted_file
         image_file.type = "medium"
         image_file.image = image
@@ -142,7 +146,7 @@ def handle_uploaded_file(fileobj, image_set, noresize=False):
     pil_image.save(raw_converted_file.file, pil_image.format)
     raw_converted_file.file.seek(0)
     image_file = ImageFile()
-    raw_converted_file.name = "{}{}".format(werder_name(), extension)
+    raw_converted_file.name = subdir_fn("{}{}".format(werder_name(), extension))
     image_file.file = raw_converted_file
     image_file.type = "thumbnail"
     image_file.image = image

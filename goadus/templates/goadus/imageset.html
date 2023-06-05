@@ -8,7 +8,7 @@
 {% for image_file in image.imagefile_set.all %}
 {% if image_file.type != 'uploaded' %}
 <tr>
-<td><a rel="nofollow" href="{{ image_file.file.url }}">{{ image_file.file.name }}</a></td>
+<td><a rel="nofollow" href="{{ image_file.file.url }}">{{ image_file }}</a></td>
 <td>{{ image_file.file.width }}×{{ image_file.file.height }} ({{ image_file.type }})</td>
 <td>{{ image_file.file.size }}</td>
 </tr>

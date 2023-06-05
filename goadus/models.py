@@ -11,15 +11,8 @@ from .utils import werder_api_key, werder_name
 
 
 class IGoadStorage(storage.FileSystemStorage):
-    def path(self, name):
-        parts = [self.location]
-        dir, filename = os.path.split(name)
-        if dir:
-            parts.append(dir)
-        parts.append(filename[0:1])
-        parts.append(filename[1:2])
-        parts.append(filename)
-        return os.path.join(*parts)
+    def url(self, name):
+        return storage.FileSystemStorage.url(self, os.path.split(name)[-1])
 
 
 class ImageSet(models.Model):
@@ -75,7 +68,7 @@ class ImageFile(models.Model):
     image = models.ForeignKey(Image, on_delete=models.CASCADE, blank=False, null=False)
 
     def __str__(self):
-        return self.file.name
+        return os.path.split(self.file.name)[-1]
 
 
 class ApiKey(models.Model):
