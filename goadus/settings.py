@@ -61,6 +61,7 @@ ROOT_URLCONF = "goadus.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [os.path.join(BASE_DIR, "goadus/templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
