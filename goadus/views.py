@@ -69,6 +69,9 @@ def handle_uploaded_file(fileobj, image_set, noresize=False):
             ".jpg",
         ),  # https://github.com/python-pillow/Pillow/issues/1138
         "PNG": ("image/png", ".png"),
+        # "WEBP": ("image/webp", ".webp"),
+        # While PIL supports writing WebP, let's just convert to JPEG
+        "WEBP": ("image/jpeg", ".jpg"),
     }
     if pil_image:
         if pil_image.format in pil_map:
