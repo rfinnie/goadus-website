@@ -16,10 +16,14 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.edit import FormView
 import PIL.ExifTags
 import PIL.Image
+from pillow_heif import register_heif_opener
 
 from .forms import UploadForm
 from .models import ApiKey, Image, ImageFile, ImageSet
 from .utils import werder_name
+
+
+register_heif_opener()
 
 
 def process_image(image):
@@ -52,6 +56,7 @@ def subdir_fn(fn):
 
 def handle_uploaded_file(fileobj, image_set, noresize=False):
     original_filename = fileobj.name
+    image_format = None
     content_type = None
     extension = None
     django_file = DjangoFile
@@ -62,21 +67,24 @@ def handle_uploaded_file(fileobj, image_set, noresize=False):
         # OSError: cannot identify image file '/not/an/image'
         pil_image = None
     pil_map = {
-        "GIF": ("image/gif", ".gif"),
-        "JPEG": ("image/jpeg", ".jpg"),
+        "GIF": ("GIF", "image/gif", ".gif"),
+        "JPEG": ("JPEG", "image/jpeg", ".jpg"),
         "MPO": (
+            "JPEG",
             "image/jpeg",
             ".jpg",
         ),  # https://github.com/python-pillow/Pillow/issues/1138
-        "PNG": ("image/png", ".png"),
-        # "WEBP": ("image/webp", ".webp"),
+        "PNG": ("PNG", "image/png", ".png"),
+        # "WEBP": ("WEBP", "image/webp", ".webp"),
         # While PIL supports writing WebP, let's just convert to JPEG
-        "WEBP": ("image/jpeg", ".jpg"),
+        "WEBP": ("JPEG", "image/jpeg", ".jpg"),
+        "HEIF": ("JPEG", "image/jpeg", ".jpg"),
     }
     if pil_image:
         if pil_image.format in pil_map:
-            content_type = pil_map[pil_image.format][0]
-            extension = pil_map[pil_image.format][1]
+            image_format = pil_map[pil_image.format][0]
+            content_type = pil_map[pil_image.format][1]
+            extension = pil_map[pil_image.format][2]
             django_file = DjangoImageFile
         else:
             pil_image.close()
@@ -102,7 +110,7 @@ def handle_uploaded_file(fileobj, image_set, noresize=False):
     image_file.image = image
     image_file.save()
 
-    if pil_image is None or pil_image.format in ("GIF",):
+    if pil_image is None or image_format in ("GIF",):
         # Exact same as "uploaded"
         raw_converted_file = django_file(fileobj)
         raw_converted_file.file.seek(0)
@@ -115,7 +123,7 @@ def handle_uploaded_file(fileobj, image_set, noresize=False):
     else:
         # Rotate if needed, strip EXIF
         raw_converted_file = django_file(io.BytesIO())
-        pil_image.save(raw_converted_file.file, pil_image.format)
+        pil_image.save(raw_converted_file.file, image_format)
         raw_converted_file.file.seek(0)
         image_file = ImageFile()
         raw_converted_file.name = subdir_fn("{}{}".format(werder_name(), extension))
@@ -132,7 +140,7 @@ def handle_uploaded_file(fileobj, image_set, noresize=False):
         pil_image.thumbnail((1280, 1280), PIL.Image.LANCZOS)
 
         raw_converted_file = django_file(io.BytesIO())
-        pil_image.save(raw_converted_file.file, pil_image.format)
+        pil_image.save(raw_converted_file.file, image_format)
         raw_converted_file.file.seek(0)
         image_file = ImageFile()
         raw_converted_file.name = subdir_fn("{}{}".format(werder_name(), extension))
@@ -146,7 +154,7 @@ def handle_uploaded_file(fileobj, image_set, noresize=False):
         pil_image.thumbnail((200, 200), PIL.Image.LANCZOS)
 
     raw_converted_file = django_file(io.BytesIO())
-    pil_image.save(raw_converted_file.file, pil_image.format)
+    pil_image.save(raw_converted_file.file, image_format)
     raw_converted_file.file.seek(0)
     image_file = ImageFile()
     raw_converted_file.name = subdir_fn("{}{}".format(werder_name(), extension))

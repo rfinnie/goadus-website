@@ -15,6 +15,7 @@ setup(
         "django-crispy-forms",
         "crispy-bootstrap4",
         "Pillow",
+        "pillow-heif",
         "tzdata",
     ],
 )
