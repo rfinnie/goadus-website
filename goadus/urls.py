@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path
@@ -37,3 +38,15 @@ urlpatterns = [
     path("upload/", views.UploadView.as_view(), name="upload"),
     path("", views.index, name="index"),
 ]
+
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    from django.views.static import serve
+
+    def serve_subdir_fn(request, path, document_root, **kwargs):
+        path = "{}/{}/{}".format(path[0:1], path[1:2], path)
+        return serve(request, path, document_root, **kwargs)
+
+    urlpatterns += static(
+        settings.MEDIA_URL, view=serve_subdir_fn, document_root=settings.MEDIA_ROOT
+    )
