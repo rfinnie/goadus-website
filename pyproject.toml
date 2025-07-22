@@ -1,0 +1,36 @@
+# SPDX-PackageSummary: goadus-website
+# SPDX-FileCopyrightText: Copyright (C) 2020-2025 Ryan Finnie
+# SPDX-License-Identifier: MPL-2.0
+[project]
+name = "goadus"
+authors = [
+    {name = "Ryan Finnie", email = "ryan@finnie.org"},
+]
+description = "goad.us"
+readme = "README.md"
+requires-python = ">=3.12"
+license = {text = "MPL-2.0"}
+dependencies = [
+    "Django",
+    "django[argon2]",
+    "django-crispy-forms",
+    "crispy-bootstrap4",
+    "Pillow",
+    "pillow-heif",
+    "tzdata",
+]
+dynamic = ["version"]
+
+[tool.setuptools.packages.find]
+include = [
+    "goadus",
+    "goadus.migrations",
+    "goadus.management.commands",
+]
+
+[tool.black]
+line-length = 132
+
+# https://pypi.org/project/Flake8-pyproject/
+[tool.flake8]
+max-line-length = 132

@@ -1,7 +1,0 @@
-Django
-django[argon2]
-django-crispy-forms
-crispy-bootstrap4
-Pillow
-pillow-heif
-tzdata

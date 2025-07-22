@@ -185,9 +185,7 @@ class UploadView(LoginRequiredMixin, FormView):
         image_set.save()
         for fileobj in request.FILES.getlist("files"):
             handle_uploaded_file(fileobj, image_set, form.cleaned_data["noresize"])
-        return HttpResponseRedirect(
-            reverse_lazy("imageset", kwargs={"slug": image_set.slug})
-        )
+        return HttpResponseRedirect(reverse_lazy("imageset", kwargs={"slug": image_set.slug}))
 
 
 class ImageView(generic.DetailView):
@@ -222,9 +220,7 @@ def api_upload(request):
     for fileobj in request.FILES.getlist("files"):
         image = handle_uploaded_file(fileobj, image_set, noresize)
         images[image.slug] = {
-            "url": request.build_absolute_uri(
-                str(reverse_lazy("image", kwargs={"slug": image.slug}))
-            ),
+            "url": request.build_absolute_uri(str(reverse_lazy("image", kwargs={"slug": image.slug}))),
             "imagefiles": {},
         }
         for imagefile in image.imagefile_set.all():
@@ -240,9 +236,7 @@ def api_upload(request):
     out = {
         "imagesets": {
             image_set.slug: {
-                "url": request.build_absolute_uri(
-                    str(reverse_lazy("imageset", kwargs={"slug": image_set.slug}))
-                ),
+                "url": request.build_absolute_uri(str(reverse_lazy("imageset", kwargs={"slug": image_set.slug}))),
                 "images": images,
             }
         }

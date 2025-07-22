@@ -1,9 +1,11 @@
-FROM python:3.10
+# SPDX-PackageSummary: goadus-website
+# SPDX-FileCopyrightText: Copyright (C) 2020-2025 Ryan Finnie
+# SPDX-License-Identifier: MPL-2.0
+FROM python:3.12
 
 WORKDIR /usr/src/app
 
 COPY . .
-RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir gunicorn .
 
 USER nobody

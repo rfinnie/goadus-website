@@ -99,17 +99,13 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "image",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="goadus.Image"
-                    ),
+                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="goadus.Image"),
                 ),
             ],
         ),
         migrations.AddField(
             model_name="image",
             name="image_set",
-            field=models.ForeignKey(
-                on_delete=django.db.models.deletion.CASCADE, to="goadus.ImageSet"
-            ),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="goadus.ImageSet"),
         ),
     ]
