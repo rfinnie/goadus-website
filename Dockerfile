@@ -6,6 +6,7 @@ FROM python:3.12
 COPY . /tmp/build
 RUN pip install --no-cache-dir '/tmp/build[gunicorn]' && useradd -ms /bin/bash app && rm -rf /tmp/build
 
+ENV DJANGO_SETTINGS_MODULE="goadus.settings"
 USER app
 CMD [ "gunicorn", "-b", "0.0.0.0:8000", "-k", "gthread", "--error-logfile", "-", "--capture-output", "goadus.wsgi:application" ]
 EXPOSE 8000/tcp
