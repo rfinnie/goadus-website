@@ -1,11 +1,5 @@
-include Makefile
-include manage.py
-include MANIFEST.in
-include README.md
-include requirements.txt
-include tests/*.py
-include tox.ini
-include goadus/static/goadus/*.css
-include goadus/static/goadus/*.js
-include goadus/static/goadus/*.jpg
-include goadus/templates/goadus/*.html
+# SPDX-PackageSummary: goadus-website
+# SPDX-FileCopyrightText: Copyright (C) 2020-2025 Ryan Finnie
+# SPDX-License-Identifier: MPL-2.0
+recursive-include goadus/static *
+recursive-include goadus/templates *

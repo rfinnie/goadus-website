@@ -21,11 +21,15 @@ dependencies = [
 ]
 dynamic = ["version"]
 
+[project.optional-dependencies]
+gunicorn = ["gunicorn"]
+
 [tool.setuptools.packages.find]
 include = [
     "goadus",
     "goadus.migrations",
     "goadus.management.commands",
+    "goadus.tests",
 ]
 
 [tool.black]
