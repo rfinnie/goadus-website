@@ -1,3 +1,9 @@
+# SPDX-PackageName: goadus-website
+# SPDX-PackageSupplier: Ryan Finnie <ryan@finnie.org>
+# SPDX-PackageDownloadLocation: https://github.com/finnix/goadus-website
+# SPDX-FileCopyrightText: © 2020 Ryan Finnie <ryan@finnie.org>
+# SPDX-License-Identifier: MPL-2.0
+
 """goadus URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:

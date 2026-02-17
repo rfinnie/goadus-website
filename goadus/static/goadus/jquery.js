@@ -1,4 +1,8 @@
-/*!
+/*
+SPDX-PackageName: jquery
+SPDX-FileCopyrightText: © 2005 jQuery Foundation, Inc. and other contributors
+SPDX-License-Identifier: MIT
+*//*!
  * jQuery JavaScript Library v1.9.1
  * http://jquery.com/
  *

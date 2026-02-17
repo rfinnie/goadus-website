@@ -1,4 +1,8 @@
-/*!
+/*
+SPDX-PackageName: jquery-zoom
+SPDX-FileCopyrightText: © 2008 Jack Moore
+SPDX-License-Identifier: MIT
+*//*!
 	Zoom 1.7.14
 	license: MIT
 	http://www.jacklmoore.com/zoom

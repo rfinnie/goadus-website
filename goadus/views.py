@@ -1,3 +1,9 @@
+# SPDX-PackageName: goadus-website
+# SPDX-PackageSupplier: Ryan Finnie <ryan@finnie.org>
+# SPDX-PackageDownloadLocation: https://github.com/finnix/goadus-website
+# SPDX-FileCopyrightText: © 2020 Ryan Finnie <ryan@finnie.org>
+# SPDX-License-Identifier: MPL-2.0
+
 from datetime import timedelta
 import io
 import json
@@ -21,7 +27,6 @@ from pillow_heif import register_heif_opener
 from .forms import UploadForm
 from .models import ApiKey, Image, ImageFile, ImageSet
 from .utils import werder_name
-
 
 register_heif_opener()
 

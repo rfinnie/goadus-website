@@ -25,3 +25,13 @@ ${VENV_DIR?}/bin/python manage.py migrate
 ${VENV_DIR?}/bin/python manage.py createsuperuser
 ${VENV_DIR?}/bin/python manage.py runserver
 ```
+
+## License
+
+This document is provided under the following license:
+
+    SPDX-PackageName: goadus-website
+    SPDX-PackageSupplier: Ryan Finnie <ryan@finnie.org>
+    SPDX-PackageDownloadLocation: https://github.com/rfinnie/goadus-website
+    SPDX-FileCopyrightText: © 2020 Ryan Finnie <ryan@finnie.org>
+    SPDX-License-Identifier: CC-BY-SA-4.0
