@@ -1,4 +1,5 @@
-# SPDX-FileCopyrightText: Copyright (C) 2018-2021 Ryan Finnie
+# SPDX-FileComment: werder
+# SPDX-FileCopyrightText: © 2018 Ryan Finnie <ryan@finnie.org>
 # SPDX-License-Identifier: MIT
 #
 # A 2021 rewrite of a 2018 Python port of a 2008 PHP port of a 1998 C

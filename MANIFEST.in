@@ -1,5 +1,7 @@
-# SPDX-PackageSummary: goadus-website
-# SPDX-FileCopyrightText: Copyright (C) 2020-2025 Ryan Finnie
+# SPDX-PackageName: goadus-website
+# SPDX-PackageSupplier: Ryan Finnie <ryan@finnie.org>
+# SPDX-PackageDownloadLocation: https://github.com/rfinnie/goadus-website
+# SPDX-FileCopyrightText: © 2020 Ryan Finnie <ryan@finnie.org>
 # SPDX-License-Identifier: MPL-2.0
 recursive-include goadus/static *
 recursive-include goadus/templates *
