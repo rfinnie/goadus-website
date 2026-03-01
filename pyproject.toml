@@ -11,7 +11,7 @@ authors = [
 description = "goad.us"
 readme = "README.md"
 requires-python = ">=3.12"
-license = {text = "MPL-2.0"}
+license = "MPL-2.0"
 dependencies = [
     "Django",
     "django[argon2]",
