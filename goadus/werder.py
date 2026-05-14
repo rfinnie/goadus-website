@@ -29,7 +29,7 @@ import sys
 class Werder:
     """Generate random (but pronounceable) werds"""
 
-    # SPDX-SnippetComment: Originally from https://codeberg.org/rfinnie/rf-pymods
+    # SPDX-SnippetComment: Originally from https://forge.colobox.com/rfinnie/rf-pymods
     # SPDX-SnippetCopyrightText: Copyright (C) 2018-2021 Ryan Finnie
     # SPDX-LicenseInfoInSnippet: MIT
 
