@@ -1,4 +1,6 @@
-# SPDX-FileComment: werder
+# SPDX-PackageName: rf-pymods
+# SPDX-PackageSupplier: Ryan Finnie <ryan@finnie.org>
+# SPDX-PackageDownloadLocation: https://forge.colobox.com/rfinnie/rf-pymods
 # SPDX-FileCopyrightText: © 2018 Ryan Finnie <ryan@finnie.org>
 # SPDX-License-Identifier: MIT
 #
@@ -26,12 +28,14 @@ import random
 import sys
 
 
+# SPDX-SnippetBegin
+# SPDX-SnippetName: werder from rf-pymods
+# SPDX-SnippetComment: Revision 2026-05-14
+# SPDX-SnippetComment: Originally from https://forge.colobox.com/rfinnie/rf-pymods
+# SPDX-SnippetCopyrightText: © 2018 Ryan Finnie <ryan@finnie.org>
+# SPDX-License-Identifier: MIT
 class Werder:
     """Generate random (but pronounceable) werds"""
-
-    # SPDX-SnippetComment: Originally from https://forge.colobox.com/rfinnie/rf-pymods
-    # SPDX-SnippetCopyrightText: Copyright (C) 2018-2021 Ryan Finnie
-    # SPDX-LicenseInfoInSnippet: MIT
 
     parts_vowel = "a a ai e e ea ee i i ie io o o oa oi oo ou u u".split(" ")
     parts_begin = "b bl cl cr dr fl fr gr k l m pl qu sl sn spl squ tr wr".split(" ")
@@ -77,6 +81,9 @@ class Werder:
             werds = random.randint(self.werds_min, self.werds_max)
 
         return " ".join([self.werd() for _ in range(werds)]).capitalize() + random.choice(["!", ".", "?"])
+
+
+# SPDX-SnippetEnd
 
 
 def main():
