@@ -25,7 +25,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
-from . import views
+from . import views, pyinfo
 
 urlpatterns = [
     path(
@@ -39,6 +39,7 @@ urlpatterns = [
         name="logout",
     ),
     path("admin/", admin.site.urls),
+    path("pyinfo/{}/".format(settings.PYINFO_KEY), pyinfo.PyInfoView.as_view(), name="pyinfo"),
     path("api/upload/", views.api_upload, name="api-upload"),
     path("image/<slug>/", views.ImageView.as_view(), name="image"),
     path("imageset/<slug>/", views.ImageSetView.as_view(), name="imageset"),
