@@ -207,7 +207,7 @@ def api_upload(request):
     if not request.headers.get("authorization"):
         return HttpResponseForbidden()
     auth_parts = request.headers["authorization"].split(" ", 1)
-    if auth_parts[0] != "Bearer" or len(auth_parts) < 2:
+    if auth_parts[0].lower() not in ("bearer", "token") or len(auth_parts) < 2:
         return HttpResponseForbidden()
     try:
         api_key = ApiKey.objects.get(slug=auth_parts[1])
