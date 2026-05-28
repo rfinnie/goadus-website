@@ -26,7 +26,6 @@ from pillow_heif import register_heif_opener
 
 from .forms import UploadForm
 from .models import ApiKey, Image, ImageFile, ImageSet
-from .utils import werder_name
 
 register_heif_opener()
 
@@ -109,7 +108,7 @@ def handle_uploaded_file(fileobj, image_set, noresize=False):
     raw_converted_file = django_file(fileobj)
     raw_converted_file.file.seek(0)
     image_file = ImageFile()
-    raw_converted_file.name = subdir_fn("{}{}".format(werder_name(), extension))
+    raw_converted_file.name = subdir_fn("{}-u{}".format(image.slug, extension))
     image_file.file = raw_converted_file
     image_file.type = "uploaded"
     image_file.image = image
@@ -120,7 +119,7 @@ def handle_uploaded_file(fileobj, image_set, noresize=False):
         raw_converted_file = django_file(fileobj)
         raw_converted_file.file.seek(0)
         image_file = ImageFile()
-        raw_converted_file.name = subdir_fn("{}{}".format(werder_name(), extension))
+        raw_converted_file.name = subdir_fn("{}-o{}".format(image.slug, extension))
         image_file.file = raw_converted_file
         image_file.type = "original"
         image_file.image = image
@@ -131,7 +130,7 @@ def handle_uploaded_file(fileobj, image_set, noresize=False):
         pil_image.save(raw_converted_file.file, image_format)
         raw_converted_file.file.seek(0)
         image_file = ImageFile()
-        raw_converted_file.name = subdir_fn("{}{}".format(werder_name(), extension))
+        raw_converted_file.name = subdir_fn("{}-o{}".format(image.slug, extension))
         image_file.file = raw_converted_file
         image_file.type = "original"
         image_file.image = image
@@ -148,7 +147,7 @@ def handle_uploaded_file(fileobj, image_set, noresize=False):
         pil_image.save(raw_converted_file.file, image_format)
         raw_converted_file.file.seek(0)
         image_file = ImageFile()
-        raw_converted_file.name = subdir_fn("{}{}".format(werder_name(), extension))
+        raw_converted_file.name = subdir_fn("{}-m{}".format(image.slug, extension))
         image_file.file = raw_converted_file
         image_file.type = "medium"
         image_file.image = image
@@ -162,7 +161,7 @@ def handle_uploaded_file(fileobj, image_set, noresize=False):
     pil_image.save(raw_converted_file.file, image_format)
     raw_converted_file.file.seek(0)
     image_file = ImageFile()
-    raw_converted_file.name = subdir_fn("{}{}".format(werder_name(), extension))
+    raw_converted_file.name = subdir_fn("{}-t{}".format(image.slug, extension))
     image_file.file = raw_converted_file
     image_file.type = "thumbnail"
     image_file.image = image
