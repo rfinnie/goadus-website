@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "slug",
-                    models.SlugField(default=goadus.utils.werder_api_key, unique=True),
+                    models.SlugField(default=goadus.utils.make_api_key, unique=True),
                 ),
                 ("date_added", models.DateTimeField(default=django.utils.timezone.now)),
                 ("date_expires", models.DateTimeField(blank=True, null=True)),

@@ -6,12 +6,12 @@
 
 import random
 
+from .baat import BAAT
 from .werder import Werder
 
 
-def werder_api_key():
-    w = Werder()
-    return "-".join([w.werd() for _ in range(4)])
+def make_api_key():
+    return str(BAAT(prefix="goadus"))
 
 
 def werder_name():

@@ -13,7 +13,7 @@ from django.db import models
 from django.urls import reverse_lazy
 from django.utils import timezone
 
-from .utils import werder_api_key, werder_name
+from .utils import make_api_key, werder_name
 
 
 class IGoadStorage(storage.FileSystemStorage):
@@ -67,7 +67,7 @@ class ImageFile(models.Model):
 
 class ApiKey(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, blank=False, null=False)
-    slug = models.SlugField(default=werder_api_key, unique=True, blank=False, null=False)
+    slug = models.SlugField(default=make_api_key, unique=True, blank=False, null=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=False, null=False)
     date_added = models.DateTimeField(default=timezone.now, blank=False, null=False)
     date_expires = models.DateTimeField(blank=True, null=True)
