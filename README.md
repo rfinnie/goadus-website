@@ -5,7 +5,7 @@ This is a quick<sup>0</sup> and dirty django port of goad.us, formerly written i
 <sup>0</sup> Not actually quick. It took about 2 full days to replace the functionality of a 300-line hack of a PHP script.
 
 ## Local dev
-### local_setting.py
+### goadus/local_settings.py
 ```python
 import os
 from goadus.settings import *
@@ -18,12 +18,13 @@ ALLOWED_HOSTS = ['127.0.0.1']
 ### Set up
 ```shell
 VENV_DIR=~/venv/goadus
-export DJANGO_SETTINGS_MODULE=local_settings
+export DJANGO_SETTINGS_MODULE=goadus.local_settings
 python3 -mvirtualenv ${VENV_DIR?}
-${VENV_DIR?}/bin/pip install -r requirements.txt
-${VENV_DIR?}/bin/python manage.py migrate
-${VENV_DIR?}/bin/python manage.py createsuperuser
-${VENV_DIR?}/bin/python manage.py runserver
+${VENV_DIR?}/bin/pip install .
+${VENV_DIR?}/bin/django-admin migrate
+${VENV_DIR?}/bin/django-admin createsuperuser
+
+${VENV_DIR?}/bin/pip install . && ${VENV_DIR?}/bin/django-admin runserver
 ```
 
 ## License
